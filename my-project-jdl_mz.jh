@@ -1,0 +1,700 @@
+entity AuthGroupPermissions {
+	id Integer required,
+	group AuthGroup required
+}
+
+entity AuthPermission {
+	id Integer required,
+	name String required maxlength(255),
+	codename String required maxlength(100)
+}
+
+entity AuthUser {
+	id Integer required,
+	password String required maxlength(128),
+	lastLogin Instant,
+	isSuperuser Boolean required,
+	username String required maxlength(150),
+	firstName String required maxlength(30),
+	lastName String required maxlength(150),
+	email String required maxlength(254),
+	isStaff Boolean required,
+	isActive Boolean required,
+	dateJoined Instant required
+}
+
+entity AuthUserGroups {
+	id Integer required,
+	group AuthGroup required
+}
+
+entity AuthUserUserPermissions {
+	id Integer required
+}
+
+entity DjangoAdminLog {
+	id Integer required,
+	actionTime Instant required,
+	objectId TextBlob,
+	objectRepr String required maxlength(200),
+	actionFlag Integer required,
+	changeMessage TextBlob required
+}
+
+entity DjangoContentType {
+	id Integer required,
+	appLabel String required maxlength(100),
+	model String required maxlength(100)
+}
+
+entity DjangoMigrations {
+	id Integer required,
+	app String required maxlength(255),
+	name String required maxlength(255),
+	applied Instant required
+}
+
+entity DjangoSession {
+	sessionKey String required maxlength(40),
+	sessionData TextBlob required,
+	expireDate Instant required
+}
+
+entity GradesGraderange {
+	id Integer required,
+	lowerLimit Double required,
+	upperLimit Double required,
+	grade String required maxlength(10),
+	description String maxlength(127)
+}
+
+entity GradesGradingsystem {
+	id Integer required,
+	name String required maxlength(255),
+	description TextBlob required
+}
+
+entity SocialAuthAssociation {
+	id Integer required,
+	serverUrl String required maxlength(255),
+	handle String required maxlength(255),
+	secret String required maxlength(255),
+	issued Integer required,
+	lifetime Integer required,
+	assocType String required maxlength(64)
+}
+
+entity SocialAuthCode {
+	id Integer required,
+	email String required maxlength(254),
+	code String required maxlength(32),
+	verified Boolean required,
+	timestamp Instant required
+}
+
+entity SocialAuthNonce {
+	id Integer required,
+	serverUrl String required maxlength(255),
+	timestamp Integer required,
+	salt String required maxlength(65)
+}
+
+entity SocialAuthPartial {
+	id Integer required,
+	token String required maxlength(32),
+	nextStep Integer required,
+	backend String required maxlength(32),
+	data TextBlob required,
+	timestamp Instant required
+}
+
+entity SocialAuthUsersocialauth {
+	id Integer required,
+	provider String required maxlength(32),
+	uid String required maxlength(255),
+	extraData TextBlob required
+}
+
+entity TaggitTag {
+	id Integer required,
+	name String required maxlength(100),
+	slug String required maxlength(100)
+}
+
+entity TaggitTaggeditem {
+	id Integer required,
+	objectId Integer required
+}
+
+entity YakshAnswer {
+	id Integer required,
+	answer TextBlob,
+	error TextBlob required,
+	marks Double required,
+	correct Boolean required,
+	skipped Boolean required
+}
+
+entity YakshAnswerpaper {
+	id Integer required,
+	attemptNumber Integer required,
+	startTime Instant required,
+	endTime Instant required,
+	userIp String required maxlength(15),
+	comments TextBlob required,
+	marksObtained Double,
+	percent Double,
+	passed Boolean,
+	status String required maxlength(20),
+	questionsOrder TextBlob required
+}
+
+entity YakshAnswerpaperAnswers {
+	id Integer required
+}
+
+entity YakshAnswerpaperQuestions {
+	id Integer required
+}
+
+entity YakshAnswerpaperQuestionsAnswered {
+	id Integer required
+}
+
+entity YakshAnswerpaperQuestionsUnanswered {
+	id Integer required
+}
+
+entity YakshArrangetestcase {
+	options TextBlob required
+}
+
+entity YakshAssignmentupload {
+	id Integer required,
+	assignmentfile String required maxlength(100)
+}
+
+entity YakshConcurrentuser {
+	id Integer required,
+	sessionKey String required maxlength(40)
+}
+
+entity YakshCourse {
+	id Integer required,
+	name String required maxlength(128),
+	enrollment String required maxlength(32),
+	active Boolean required,
+	createdOn Instant required,
+	isTrial Boolean required,
+	instructions TextBlob,
+	endEnrollTime Instant,
+	startEnrollTime Instant,
+	code String maxlength(128),
+	hidden Boolean required,
+	viewGrade Boolean required
+}
+
+entity YakshCourseLearningModule {
+	id Integer required
+}
+
+entity YakshCourseRejected {
+	id Integer required
+}
+
+entity YakshCourseRequests {
+	id Integer required
+}
+
+entity YakshCourseStudents {
+	id Integer required
+}
+
+entity YakshCourseTeachers {
+	id Integer required
+}
+
+entity YakshCoursestatus {
+	id Integer required,
+	grade String maxlength(255),
+	percentage Double required,
+	percentCompleted Integer required
+}
+
+entity YakshCoursestatusCompletedUnits {
+	id Integer required
+}
+
+entity YakshFileupload {
+	id Integer required,
+	file String required maxlength(100),
+	extract Boolean required,
+	hide Boolean required
+}
+
+entity YakshFloattestcase {
+	correct Double required,
+	errorMargin Double
+}
+
+entity YakshHooktestcase {
+	hookCode TextBlob required,
+	weight Double required
+}
+
+entity YakshIntegertestcase {
+	correct Integer required
+}
+
+entity YakshLearningmodule {
+	id Integer required,
+	name String required maxlength(255),
+	description TextBlob,
+	order Integer required,
+	checkPrerequisite Boolean required,
+	htmlData TextBlob,
+	isTrial Boolean required,
+	active Boolean required,
+	checkPrerequisitePasses Boolean required
+}
+
+entity YakshLearningmoduleLearningUnit {
+	id Integer required
+}
+
+entity YakshLearningunit {
+	id Integer required,
+	order Integer required,
+	type String required maxlength(16),
+	checkPrerequisite Boolean required
+}
+
+entity YakshLesson {
+	id Integer required,
+	name String required maxlength(255),
+	description TextBlob required,
+	htmlData TextBlob,
+	active Boolean required,
+	videoFile String maxlength(100)
+}
+
+entity YakshLessonfile {
+	id Integer required,
+	file String required maxlength(100)
+}
+
+entity YakshMcqtestcase {
+	options TextBlob required,
+	correct Boolean required
+}
+
+entity YakshProfile {
+	id Integer required,
+	rollNumber String required maxlength(20),
+	institute String required maxlength(128),
+	department String required maxlength(64),
+	position String required maxlength(64),
+	timezone String required maxlength(64),
+	activationKey String maxlength(255),
+	isEmailVerified Boolean required,
+	keyExpiryTime Instant,
+	isModerator Boolean required
+}
+
+entity YakshQuestion {
+	id Integer required,
+	summary String required maxlength(256),
+	description TextBlob required,
+	points Double required,
+	language String required maxlength(24),
+	type String required maxlength(24),
+	active Boolean required,
+	snippet TextBlob required,
+	partialGrading Boolean required,
+	gradeAssignmentUpload Boolean required,
+	minTime Integer required,
+	solution TextBlob required
+}
+
+entity YakshQuestionpaper {
+	id Integer required,
+	shuffleQuestions Boolean required,
+	totalMarks Double required,
+	fixedQuestionOrder String required maxlength(255),
+	shuffleTestcases Boolean required
+}
+
+entity YakshQuestionpaperFixedQuestions {
+	id Integer required
+}
+
+entity YakshQuestionpaperRandomQuestions {
+	id Integer required
+}
+
+entity YakshQuestionset {
+	id Integer required,
+	marks Double required,
+	numQuestions Integer required
+}
+
+entity YakshQuestionsetQuestions {
+	id Integer required
+}
+
+entity YakshQuiz {
+	id Integer required,
+	startDateTime Instant,
+	endDateTime Instant,
+	duration Integer required,
+	active Boolean required,
+	description String required maxlength(256),
+	passCriteria Double required,
+	attemptsAllowed Integer required,
+	timeBetweenAttempts Double required,
+	isTrial Boolean required,
+	instructions TextBlob,
+	viewAnswerpaper Boolean required,
+	allowSkip Boolean required,
+	isExercise Boolean required,
+	weightage Double required
+}
+
+entity YakshStandardtestcase {
+	testCase TextBlob required,
+	weight Double required,
+	testCaseArgs TextBlob required
+}
+
+entity YakshStdiobasedtestcase {
+	expectedInput TextBlob,
+	expectedOutput TextBlob required,
+	weight Integer required
+}
+
+entity YakshStringtestcase {
+	correct TextBlob required,
+	stringCheck String required maxlength(200)
+}
+
+entity YakshTestcase {
+	id Integer required,
+	type String maxlength(24)
+}
+
+entity YakshTestcaseorder {
+	id Integer required,
+	order TextBlob required
+}
+
+
+
+// Relations
+relationship ManyToOne {
+	AuthGroupPermissions{permission required} to AuthPermission{authGroupPermissions}
+}
+
+relationship ManyToOne {
+	AuthPermission{contentType required} to DjangoContentType{authPermission}
+}
+
+relationship ManyToOne {
+	AuthUserGroups{user required} to AuthUser{authUserGroups}
+}
+
+relationship ManyToOne {
+	AuthUserUserPermissions{user required} to AuthUser{authUserUserPermissions}
+}
+
+relationship ManyToOne {
+	AuthUserUserPermissions{permission required} to AuthPermission{authUserUserPermissions}
+}
+
+relationship ManyToOne {
+	DjangoAdminLog{contentType} to DjangoContentType{djangoAdminLog}
+}
+
+relationship ManyToOne {
+	DjangoAdminLog{user required} to AuthUser{djangoAdminLog}
+}
+
+relationship ManyToOne {
+	GradesGraderange{system required} to GradesGradingsystem{gradesGraderange}
+}
+
+relationship ManyToOne {
+	GradesGradingsystem{creator} to AuthUser{gradesGradingsystem}
+}
+
+relationship ManyToOne {
+	SocialAuthUsersocialauth{user required} to AuthUser{socialAuthUsersocialauth}
+}
+
+relationship ManyToOne {
+	TaggitTaggeditem{contentType required} to DjangoContentType{taggitTaggeditem}
+}
+
+relationship ManyToOne {
+	TaggitTaggeditem{tag required} to TaggitTag{taggitTaggeditem}
+}
+
+relationship ManyToOne {
+	YakshAnswer{question required} to YakshQuestion{yakshAnswer}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaper{questionPaper required} to YakshQuestionpaper{yakshAnswerpaper}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaper{user required} to AuthUser{yakshAnswerpaper}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaper{course} to YakshCourse{yakshAnswerpaper}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperAnswers{answerpaper required} to YakshAnswerpaper{yakshAnswerpaperAnswers}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperAnswers{answer required} to YakshAnswer{yakshAnswerpaperAnswers}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestions{answerpaper required} to YakshAnswerpaper{yakshAnswerpaperQuestions}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestions{question required} to YakshQuestion{yakshAnswerpaperQuestions}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestionsAnswered{answerpaper required} to YakshAnswerpaper{yakshAnswerpaperQuestionsAnswered}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestionsAnswered{question required} to YakshQuestion{yakshAnswerpaperQuestionsAnswered}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestionsUnanswered{answerpaper required} to YakshAnswerpaper{yakshAnswerpaperQuestionsUnanswered}
+}
+
+relationship ManyToOne {
+	YakshAnswerpaperQuestionsUnanswered{question required} to YakshQuestion{yakshAnswerpaperQuestionsUnanswered}
+}
+
+relationship ManyToOne {
+	YakshArrangetestcase{testcasePtr required} to YakshTestcase{yakshArrangetestcase}
+}
+
+relationship ManyToOne {
+	YakshAssignmentupload{assignmentquestion required} to YakshQuestion{yakshAssignmentupload}
+}
+
+relationship ManyToOne {
+	YakshAssignmentupload{user required} to AuthUser{yakshAssignmentupload}
+}
+
+relationship ManyToOne {
+	YakshAssignmentupload{questionPaper} to YakshQuestionpaper{yakshAssignmentupload}
+}
+
+relationship ManyToOne {
+	YakshAssignmentupload{course} to YakshCourse{yakshAssignmentupload}
+}
+
+relationship OneToOne {
+	YakshConcurrentuser{concurrentUser required} to AuthUser{yakshConcurrentuser}
+}
+
+relationship ManyToOne {
+	YakshCourse{creator required} to AuthUser{yakshCourse}
+}
+
+relationship ManyToOne {
+	YakshCourse{gradingSystem} to GradesGradingsystem{yakshCourse}
+}
+
+relationship ManyToOne {
+	YakshCourseLearningModule{course required} to YakshCourse{yakshCourseLearningModule}
+}
+
+relationship ManyToOne {
+	YakshCourseLearningModule{learningmodule required} to YakshLearningmodule{yakshCourseLearningModule}
+}
+
+relationship ManyToOne {
+	YakshCourseRejected{course required} to YakshCourse{yakshCourseRejected}
+}
+
+relationship ManyToOne {
+	YakshCourseRejected{user required} to AuthUser{yakshCourseRejected}
+}
+
+relationship ManyToOne {
+	YakshCourseRequests{course required} to YakshCourse{yakshCourseRequests}
+}
+
+relationship ManyToOne {
+	YakshCourseRequests{user required} to AuthUser{yakshCourseRequests}
+}
+
+relationship ManyToOne {
+	YakshCourseStudents{course required} to YakshCourse{yakshCourseStudents}
+}
+
+relationship ManyToOne {
+	YakshCourseStudents{user required} to AuthUser{yakshCourseStudents}
+}
+
+relationship ManyToOne {
+	YakshCourseTeachers{course required} to YakshCourse{yakshCourseTeachers}
+}
+
+relationship ManyToOne {
+	YakshCourseTeachers{user required} to AuthUser{yakshCourseTeachers}
+}
+
+relationship ManyToOne {
+	YakshCoursestatus{course required} to YakshCourse{yakshCoursestatus}
+}
+
+relationship ManyToOne {
+	YakshCoursestatus{currentUnit} to YakshLearningunit{yakshCoursestatus}
+}
+
+relationship ManyToOne {
+	YakshCoursestatus{user required} to AuthUser{yakshCoursestatus}
+}
+
+relationship ManyToOne {
+	YakshCoursestatusCompletedUnits{coursestatus required} to YakshCoursestatus{yakshCoursestatusCompletedUnits}
+}
+
+relationship ManyToOne {
+	YakshCoursestatusCompletedUnits{learningunit required} to YakshLearningunit{yakshCoursestatusCompletedUnits}
+}
+
+relationship ManyToOne {
+	YakshFileupload{question required} to YakshQuestion{yakshFileupload}
+}
+
+relationship ManyToOne {
+	YakshFloattestcase{testcasePtr required} to YakshTestcase{yakshFloattestcase}
+}
+
+relationship ManyToOne {
+	YakshHooktestcase{testcasePtr required} to YakshTestcase{yakshHooktestcase}
+}
+
+relationship ManyToOne {
+	YakshIntegertestcase{testcasePtr required} to YakshTestcase{yakshIntegertestcase}
+}
+
+relationship ManyToOne {
+	YakshLearningmodule{creator required} to AuthUser{yakshLearningmodule}
+}
+
+relationship ManyToOne {
+	YakshLearningmoduleLearningUnit{learningmodule required} to YakshLearningmodule{yakshLearningmoduleLearningUnit}
+}
+
+relationship ManyToOne {
+	YakshLearningmoduleLearningUnit{learningunit required} to YakshLearningunit{yakshLearningmoduleLearningUnit}
+}
+
+relationship ManyToOne {
+	YakshLearningunit{lesson} to YakshLesson{yakshLearningunit}
+}
+
+relationship ManyToOne {
+	YakshLearningunit{quiz} to YakshQuiz{yakshLearningunit}
+}
+
+relationship ManyToOne {
+	YakshLesson{creator required} to AuthUser{yakshLesson}
+}
+
+relationship ManyToOne {
+	YakshLessonfile{lesson required} to YakshLesson{yakshLessonfile}
+}
+
+relationship ManyToOne {
+	YakshMcqtestcase{testcasePtr required} to YakshTestcase{yakshMcqtestcase}
+}
+
+relationship OneToOne {
+	YakshProfile{user required} to AuthUser{yakshProfile}
+}
+
+relationship ManyToOne {
+	YakshQuestion{user required} to AuthUser{yakshQuestion}
+}
+
+relationship ManyToOne {
+	YakshQuestionpaper{quiz required} to YakshQuiz{yakshQuestionpaper}
+}
+
+relationship ManyToOne {
+	YakshQuestionpaperFixedQuestions{questionpaper required} to YakshQuestionpaper{yakshQuestionpaperFixedQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuestionpaperFixedQuestions{question required} to YakshQuestion{yakshQuestionpaperFixedQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuestionpaperRandomQuestions{questionpaper required} to YakshQuestionpaper{yakshQuestionpaperRandomQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuestionpaperRandomQuestions{questionset required} to YakshQuestionset{yakshQuestionpaperRandomQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuestionsetQuestions{questionset required} to YakshQuestionset{yakshQuestionsetQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuestionsetQuestions{question required} to YakshQuestion{yakshQuestionsetQuestions}
+}
+
+relationship ManyToOne {
+	YakshQuiz{creator} to AuthUser{yakshQuiz}
+}
+
+relationship ManyToOne {
+	YakshStandardtestcase{testcasePtr required} to YakshTestcase{yakshStandardtestcase}
+}
+
+relationship ManyToOne {
+	YakshStdiobasedtestcase{testcasePtr required} to YakshTestcase{yakshStdiobasedtestcase}
+}
+
+relationship ManyToOne {
+	YakshStringtestcase{testcasePtr required} to YakshTestcase{yakshStringtestcase}
+}
+
+relationship ManyToOne {
+	YakshTestcase{question} to YakshQuestion{yakshTestcase}
+}
+
+relationship ManyToOne {
+	YakshTestcaseorder{answerPaper required} to YakshAnswerpaper{yakshTestcaseorder}
+}
+
+relationship ManyToOne {
+	YakshTestcaseorder{question required} to YakshQuestion{yakshTestcaseorder}
+}
+
+
+
+// Options
+service * with serviceClass
+paginate * with pagination
+dto * with mapstruct
+filter *
+
